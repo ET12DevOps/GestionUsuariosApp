@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 const app = express()
 
 //puerto desde variable de entorno o 3000 por defecto
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 
 //body parser para leer el contenido json ubicado en el body en cada request
 app.use(bodyParser.urlencoded({ extended: false }));
