@@ -1,4 +1,4 @@
-﻿var url = window.location.protocol + "//" + window.location.host + "/";
+var url = window.location.protocol + "//" + window.location.host + "/";
 
 const getData = async () => {
     try {
