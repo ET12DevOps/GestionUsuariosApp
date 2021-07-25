@@ -5,20 +5,32 @@
     <%- include('../partials/head'); %>
 </head>
 
-<body class="bg-black-alt font-sans leading-normal tracking-normal">
+<body class="container">
 
     <header>
         <%- include('../partials/header'); %>
     </header>
 
     <main>
-        <div class="container w-full mx-auto pt-24">
-            <h1 class="font-bold text-3xl pt-4">
+        <div>
+            <h1 class="title is-2">
                 <%= title %>
             </h1>
-            <div class="shadow rounded my-6">
-                <table id="table" class="min-w-full bg-white">
-    
+            <div class="">
+                <table id="users_datatable" class="table is-bordered is-hoverable is-striped is-fullwidth">
+                    <thead>
+                        <!-- <th>Identificador</th>
+                        <th>Usuario</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Estado</th>
+                        <th>Creacion</th>
+                        <th>Creacion</th>
+                        <th>Creacion</th>
+                        <th>Creacion</th>
+                        <th>Creacion</th> -->
+                    </thead>    
                 </table>
             </div>
         </div>
@@ -28,7 +40,7 @@
 
     </footer>
 
-    <script src="../public/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
     <script src="../public/js/users.js"></script>
 </body>
 
