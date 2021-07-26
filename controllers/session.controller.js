@@ -2,10 +2,11 @@ const express = require('express')
 
 const router = express.Router()
 
-router.get('/dashboard', (req, res) => {
+router.get('/sessions', (req, res) => {
     if (req.isAuthenticated()) {
-        res.render('./pages/dashboard', { 
-            title: "Panel"})
+        res.render('./pages/sessions', { 
+            title: "Sesiones"
+        })
     } else {
         res.redirect('/login')
     }

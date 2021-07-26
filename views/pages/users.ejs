@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body class="container is-fluid">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div>
+            <h1 class="title is-2">
+                <%= title %>
+            </h1>
+            <progress id="bar" class="progress is-small is-primary" max="100">20%</progress>
+            <div class="">
+                <table id="users_datatable" class="table is-hoverable is-striped is-fullwidth">
+                  
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+    <script src="../public/js/users.js"></script>
+</body>
+
+</html>
