@@ -30,7 +30,7 @@ app.use(passport.initialize())
 .use(passport.session())
 
 passport.use(new passportLocal(function(username, password, done) {
-    if (username === 'jonathanvgms@gmail.com' && password === "1234")
+    if (username === 'admin@mail.com' && password === "1234")
         return done(null, { id: 1, name: 'asd' })
     done(null, false)
 }))
