@@ -1,52 +1,50 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="#">
+      <!-- <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"> -->
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="/">
+        <i class="las la-home la-lg"></i>
+        Home
+      </a>
+      <a class="navbar-item" href="/dashboard">
+        <i class="las la-tachometer-alt la-lg"></i>
+        Panel
+      </a>
+      <a class="navbar-item" href="/users">
+        <i class="las la-users la-lg"></i>
+        Usuarios
+      </a>
+      <a class="navbar-item" href="/roles">
+        <i class="las la-user-tag la-lg"></i>
+        Roles
+      </a>
+      <a class="navbar-item" href="/sessions">
+        <i class="las la-user-check la-lg"></i>
+        Sesiones
+      </a>
+    </div>
+
+    <div class="navbar-end">
       <a class="navbar-item" href="#">
-        <!-- <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"> -->
+        <i class="las la-user la-lg"></i>
+        <%= user.firstName %>
+          <%= user.lastName %>
       </a>
-  
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
+      <a class="navbar-item" href="/logout">
+        <i class="las la-sign-out-alt la-lg"></i>
+        Salir
       </a>
     </div>
-  
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item" href="/">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-          </svg>
-          Home
-        </a>
-        <a class="navbar-item" href="/dashboard">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-          Panel</a>
-        <a class="navbar-item" href="/users">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-          </svg>
-          Usuarios</a>
-        <a class="navbar-item" href="/roles">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-          </svg>
-          Roles</a>
-        <a class="navbar-item" href="/sessions">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-          </svg>
-          Sesiones</a>
-      </div>
-  
-      <div class="navbar-end">
-        <a class="navbar-item" href="/logout">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-          </svg>
-          Salir</a>
-      </div>
-    </div>
-  </nav>
+  </div>
+</nav>

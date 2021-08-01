@@ -4,8 +4,10 @@ const db = require('../../models')
 const User = db.User
 const { v4: uuidv4 } = require('uuid')
 const bcrypt = require('bcrypt');
+const auth = require('../../auth')
 
-router.get('/users', async (req, res) => {
+router.get('/users', auth.isLoggedIn, async (req, res) => {
+    
     await User.findAll()
         .then(data => {
             res.send(data);
@@ -18,7 +20,7 @@ router.get('/users', async (req, res) => {
         });
 })
 
-router.get('/users/:id', async (req, res) => {
+router.get('/users/:id', auth.isLoggedIn, async (req, res) => {
     const id = req.params.id;
 
     await User.findByPk(id)
@@ -32,7 +34,7 @@ router.get('/users/:id', async (req, res) => {
         });
 })
 
-router.post('/users', async (req, res) => {
+router.post('/users', auth.isLoggedIn, async (req, res) => {
 
     // Validar el request (si no es vacio)
     if (!req.body.username || !req.body.password || !req.body.email) {
@@ -50,10 +52,10 @@ router.post('/users', async (req, res) => {
         email: req.body.email,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        enabled: true,
-        createAt: new Date().getDate(),
+        enabled: req.body.enabled,
+        createAt: Date.now(),
         createdBy: '',
-        updatedAt: new Date().getDate(),
+        updatedAt: Date.now(),
         updatedBy: ''
     };
 
@@ -70,7 +72,7 @@ router.post('/users', async (req, res) => {
         });
 })
 
-router.put('/users/:id', async (req, res) => {
+router.put('/users/:id', auth.isLoggedIn, async (req, res) => {
     const id = req.params.id;
 
     //actualizo la informacion del objeto user
@@ -95,7 +97,7 @@ router.put('/users/:id', async (req, res) => {
         });
 })
 
-router.delete('/users/:id', async (req, res) => {
+router.delete('/users/:id', auth.isLoggedIn, async (req, res) => {
 
     const id = req.params.id;
 

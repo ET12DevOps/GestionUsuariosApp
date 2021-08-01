@@ -1,11 +1,10 @@
 //imports
 const express = require('express')
 const db = require('./models')
-var bodyParser = require('body-parser');
-const passport = require('passport')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
-const passportLocal = require('passport-local').Strategy
+const passport = require('passport')
+const auth = require('./auth')
 
 const app = express()
 
@@ -13,6 +12,7 @@ const app = express()
 const port = process.env.PORT || 3000;
 
 //body parser para leer el contenido json ubicado en el body en cada request
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //secreto para la cookie
@@ -27,21 +27,7 @@ app.use(session({
 //configuracion passport
 app.use(passport.initialize())
 
-.use(passport.session())
-
-passport.use(new passportLocal(function(username, password, done) {
-    if (username === 'admin@mail.com' && password === "1234")
-        return done(null, { id: 1, name: 'asd' })
-    done(null, false)
-}))
-
-passport.serializeUser((user, done) => {
-    done(null, user, user.id)
-})
-
-passport.deserializeUser((user, done) => {
-    done(null, user, {id: 1, name: 'asd' })
-})
+app.use(passport.session())
 
 app.post('/login', 
     passport.authenticate('local', {
@@ -51,6 +37,7 @@ app.post('/login',
 
 app.get('/logout', (req, res) => {
     req.logout();
+    req.session.destroy()
     res.redirect('/login');
 });
 
@@ -60,6 +47,7 @@ app.use('/public', express.static(__dirname + '/public'));
 //defino el motor de render para html
 app.set('views', './views')
 app.set('view engine', 'ejs')
+app.set('trust proxy', true);
 
 //declaracion views controllers
 app.use('/', require('./controllers/user.controller'))

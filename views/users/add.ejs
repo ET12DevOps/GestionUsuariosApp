@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body>
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main class="container is-fluid">
+        <div>
+            <h1 class="title is-2 mt-4">
+                <%= title %>
+            </h1>
+        </div>
+
+        <div class="my-6">
+            <div class="field">
+                <label class="label">USUARIO</label>
+                <div class="control">
+                    <input class="input" type="text" name="username" id="username">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">CONTRASEÑA</label>
+                <div class="control">
+                    <input class="input" type="password" name="password" id="password">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">EMAIL</label>
+                <div class="control">
+                    <input class="input" type="text" name="email" id="email">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">NOMBRE</label>
+                <div class="control">
+                    <input class="input" type="text" name="firstName" id="firstName">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">APELLIDO</label>
+                <div class="control">
+                    <input class="input" type="text" name="lastName" id="lastName">
+                </div>
+            </div>
+            <div class="field">
+                <input id="enabled" type="checkbox" name="enabled" class="switch is-outlined is-info is-rtl">
+                <label for="enabled" class="label is-small">ESTADO</label>
+            </div>
+            <button id="save-user" type="submit" class="button is-outlined is-primary">Guardar</button>
+            <a class="button is-outlined" href="/users">Cancelar</a>
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+    <script src="../public/js/users/add.js"></script>
+</body>
+
+</html>

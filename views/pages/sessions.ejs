@@ -13,12 +13,47 @@
 
     <main class="container is-fluid">
         <div>
-            <h1 class="title is-2">
+            <h1 class="title is-2 mt-4">
                 <%= title %>
             </h1>
-            <p>
-
-            </p>
+            <div class="tabs is-fullwidth">
+                <ul>
+                    <li class="is-active"><a>Activas</a></li>
+                    <li><a>Historicas</a></li>
+                </ul>
+            </div>
+            <div class="box">
+                <div>
+                    <p class="subtitle is-5 has-text-weight-bold is-inline">Username:
+                    </p>
+                    <%= user.username%>
+                </div>
+                <div>
+                    <p class="subtitle is-5 has-text-weight-bold is-inline">IP:
+                    </p>
+                    <%= headers.ip%>
+                </div>
+                <div>
+                    <p class="subtitle is-5 has-text-weight-bold is-inline">Browser:
+                    </p>
+                    <%= headers.browser%>
+                </div>
+                <div>
+                    <p class="subtitle is-5 has-text-weight-bold is-inline">Language:
+                    </p>
+                    <%= headers.acceptLanguage%>
+                </div>
+                <div>
+                    <p class="subtitle is-5 has-text-weight-bold is-inline">Country:
+                    </p>
+                    <%= headers.country%>
+                </div>
+                <div>
+                    <p class="subtitle is-5 has-text-weight-bold is-inline">Region:
+                    </p>
+                    <%= headers.region%>
+                </div>
+            </div>
         </div>
     </main>
 

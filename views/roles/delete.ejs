@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body>
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main class="container is-fluid">
+        <div>
+            <h1 class="title is-2 mt-4">
+                <%= title %>
+            </h1>
+        </div>
+
+        <div class="my-6">
+            <div class="field">
+                <label class="label">IDENTIFICADOR</label>
+                <div class="control">
+                    <input class="input" type="text" value="<%= roleId %>" name="id" id="roleId" disabled>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">NOMBRE</label>
+                <div class="control">
+                    <input class="input" type="text" name="name" id="name" disabled>
+                </div>
+            </div>
+            <div class="field">
+                <input id="enabled" type="checkbox" name="enabled" class="switch is-outlined is-info is-rtl" disabled>
+                <label for="enabled" class="label is-small">ESTADO</label>
+            </div>
+            <div class="field">
+                <label class="label">CREACION</label>
+                <div class="control">
+                    <input class="input" type="text" name="createdAt" id="createdAt" disabled>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">ULTIMA ACTUALIZACION</label>
+                <div class="control">
+                    <input class="input" type="text" name="updatedAt" id="updatedAt" disabled>
+                </div>
+            </div>
+            <div class="mt-6">
+                <h3 class="subtitle is-5">¿Desea eliminar el rol?</h3>
+                <button id="save-role" type="submit" class="button is-outlined is-danger">Eliminar</button>
+                <a class="button is-outlined" href="/roles">Cancelar</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+    <script src="../../public/js/roles/edit.js"></script>
+    <script src="../../public/js/roles/delete.js"></script>
+</body>
+
+</html>

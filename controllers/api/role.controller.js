@@ -3,8 +3,10 @@ const router = express.Router()
 const db = require('../../models')
 const Role = db.Role
 const { v4: uuidv4 } = require('uuid')
+const auth = require('../../auth')
 
-router.get('/roles', async (req, res) => {
+router.get('/roles', auth.isLoggedIn, async (req, res) => {
+
     await Role.findAll()
         .then(data => {
             res.send(data);
@@ -17,7 +19,8 @@ router.get('/roles', async (req, res) => {
         });
 })
 
-router.get('/roles/:id', async (req, res) => {
+router.get('/roles/:id', auth.isLoggedIn, async (req, res) => {
+
     const id = req.params.id;
 
     await Role.findByPk(id)
@@ -31,7 +34,7 @@ router.get('/roles/:id', async (req, res) => {
         });
 })
 
-router.post('/roles', async (req, res) => {
+router.post('/roles', auth.isLoggedIn, async (req, res) => {
 
     // Validar el request (si no es vacio el nombre)
     if (!req.body.name) {
@@ -45,10 +48,10 @@ router.post('/roles', async (req, res) => {
     const role = {
         id: uuidv4(),
         name: req.body.name,
-        enabled: true,
-        createAt: new Date().getDate(),
+        enabled: req.body.enabled,
+        createAt: Date.now(),
         createdBy: '',
-        updatedAt: new Date().getDate(),
+        updatedAt: Date.now(),
         updatedBy: ''
     };
 
@@ -65,9 +68,11 @@ router.post('/roles', async (req, res) => {
         });
 })
 
-router.put('/roles/:id', async (req, res) => {
+router.put('/roles/:id', auth.isLoggedIn, async (req, res) => {
     const id = req.params.id;
-
+    
+    req.body.updatedAt = Date.now()
+    
     //actualizo la informacion del objeto role
     Role.update(req.body, {
         where: { id: id }
@@ -79,7 +84,7 @@ router.put('/roles/:id', async (req, res) => {
                 });
             } else {
                 res.send({
-                    message: `Cannot update Role with id=${id}. Maybe Tutorial was not found or req.body is empty!`
+                    message: `Cannot update Role with id=${id}. Maybe Role was not found or req.body is empty!`
                 });
             }
         })
@@ -90,11 +95,11 @@ router.put('/roles/:id', async (req, res) => {
         });
 })
 
-router.delete('/roles/:id', async (req, res) => {
+router.delete('/roles/:id', auth.isLoggedIn, async (req, res) => {
 
     const id = req.params.id;
 
-    User.destroy({
+    Role.destroy({
         where: { id: id }
     })
         .then(num => {
