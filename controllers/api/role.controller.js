@@ -70,7 +70,7 @@ router.post('/roles', auth.isLoggedIn, async (req, res) => {
 
 router.put('/roles/:id', auth.isLoggedIn, async (req, res) => {
     const id = req.params.id;
-    
+    console.log(req.body)
     req.body.updatedAt = Date.now()
     
     //actualizo la informacion del objeto role

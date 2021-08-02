@@ -16,7 +16,6 @@ const getData = async() => {
     updatedAt.value =  new Date(data.updatedAt).toLocaleString('es-AR')
 }
 
-
 document.addEventListener("DOMContentLoaded", function(){
     getData()
 });
