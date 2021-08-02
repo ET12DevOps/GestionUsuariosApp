@@ -1,4 +1,4 @@
-<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+<nav class="navbar is-primary" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="#">
       <!-- <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"> -->
@@ -17,22 +17,31 @@
         <i class="las la-home la-lg"></i>
         Home
       </a>
-      <a class="navbar-item" href="/dashboard">
-        <i class="las la-tachometer-alt la-lg"></i>
-        Panel
-      </a>
-      <a class="navbar-item" href="/users">
-        <i class="las la-users la-lg"></i>
-        Usuarios
-      </a>
-      <a class="navbar-item" href="/roles">
-        <i class="las la-user-tag la-lg"></i>
-        Roles
-      </a>
-      <a class="navbar-item" href="/sessions">
-        <i class="las la-user-check la-lg"></i>
-        Sesiones
-      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Administracion
+        </a>
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="/dashboard">
+            <i class="las la-tachometer-alt la-lg"></i>
+            Panel
+          </a>
+          <a class="navbar-item" href="/users">
+            <i class="las la-users la-lg"></i>
+            Usuarios
+          </a>
+          <a class="navbar-item" href="/roles">
+            <i class="las la-user-tag la-lg"></i>
+            Roles
+          </a>
+          <a class="navbar-item" href="/sessions">
+            <i class="las la-user-check la-lg"></i>
+            Sesiones
+          </a>
+        </div>
+      </div>
     </div>
 
     <div class="navbar-end">

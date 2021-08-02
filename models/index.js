@@ -32,13 +32,12 @@ Object.keys(db).forEach(modelName => {
 });
 
 db.sequelize = sequelize;
-db.Sequelize = Sequelize;
 
 db.User = require("./user.model.js")(sequelize, Sequelize);
 db.Role = require("./role.model.js")(sequelize, Sequelize);
-db.Logins = require("./login.model.js")(sequelize, Sequelize);
+db.Login = require("./login.model.js")(sequelize, Sequelize);
 
-db.Logins.belongsTo(db.User, {
+db.Login.belongsTo(db.User, {
   foreignKey: "userId"
 })
 

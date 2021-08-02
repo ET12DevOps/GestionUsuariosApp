@@ -11,30 +11,29 @@
         <%- include('../partials/header'); %>
     </header>
 
-    <main class="container is-fluid">
-        <div>
+    <section>
 
-            <h1 class="title is-2 mt-4">
-                <%= title %>
-            </h1>
+        <div class="container is-fluid">
+            <div>
 
-            <a class="button is-primary my-6" href="/roles/add">
-                <i class="las la-tag la-lg"></i>
-                Nuevo</a>
+                <h1 class="title is-2 mt-4">
+                    <%= title %>
+                </h1>
 
-            <progress id="bar" class="progress is-small is-primary" max="100">20%</progress>
+                <a class="button is-primary my-6" href="/roles/add">
+                    <i class="las la-tag la-lg"></i>
+                    Nuevo</a>
 
-            <div class="table-container">
-                <table id="roles_datatable" class="table is-hoverable is-striped is-fullwidth">
+                <progress id="bar" class="progress is-small is-primary" max="100">20%</progress>
 
-                </table>
+                <div class="table-container">
+                    <table id="roles_datatable" class="table is-hoverable is-striped is-fullwidth">
+
+                    </table>
+                </div>
             </div>
         </div>
-    </main>
-
-    <footer>
-
-    </footer>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
     <script src="../public/js/roles/index.js"></script>

@@ -9,7 +9,7 @@ passport.use(new passportLocal(async function(username, password, done) {
     const userLogged = await User.findOne({ where: { username: username } })
         
     await bcrypt.compare(password, userLogged.dataValues.password)
-        .then(function(err, result) {            
+        .then(function(err, result) {
             return done(null, userLogged.dataValues)
         })
         .catch(err => {            

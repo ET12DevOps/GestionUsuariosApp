@@ -7,15 +7,35 @@ module.exports = (sequelize, DataTypes) => {
             unique: true,
             autoIncrement: true
         },
-        provider: {
+        userId: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        providerKey: {
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        ip: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        browser: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        language: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        createdAt: {
+        country: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        region: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        loggedAt: {
             type: DataTypes.DATE,
             allowNull: false,
         }

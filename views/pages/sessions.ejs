@@ -11,56 +11,21 @@
         <%- include('../partials/header'); %>
     </header>
 
-    <main class="container is-fluid">
-        <div>
-            <h1 class="title is-2 mt-4">
-                <%= title %>
-            </h1>
-            <div class="tabs is-fullwidth">
-                <ul>
-                    <li class="is-active"><a>Activas</a></li>
-                    <li><a>Historicas</a></li>
-                </ul>
+    <section>
+
+        <div class="container is-fluid">
+            <div>
+                <h1 class="title is-2 my-4">
+                    <%= title %>
+                </h1>
             </div>
-            <div class="box">
-                <div>
-                    <p class="subtitle is-5 has-text-weight-bold is-inline">Username:
-                    </p>
-                    <%= user.username%>
-                </div>
-                <div>
-                    <p class="subtitle is-5 has-text-weight-bold is-inline">IP:
-                    </p>
-                    <%= headers.ip%>
-                </div>
-                <div>
-                    <p class="subtitle is-5 has-text-weight-bold is-inline">Browser:
-                    </p>
-                    <%= headers.browser%>
-                </div>
-                <div>
-                    <p class="subtitle is-5 has-text-weight-bold is-inline">Language:
-                    </p>
-                    <%= headers.acceptLanguage%>
-                </div>
-                <div>
-                    <p class="subtitle is-5 has-text-weight-bold is-inline">Country:
-                    </p>
-                    <%= headers.country%>
-                </div>
-                <div>
-                    <p class="subtitle is-5 has-text-weight-bold is-inline">Region:
-                    </p>
-                    <%= headers.region%>
-                </div>
-            </div>
+
+            <progress id="bar" class="progress is-small is-primary" max="100">20%</progress>
+
+            <div id="content"></div>
         </div>
-    </main>
-
-    <footer>
-
-    </footer>
-
+    </section>
+    <script src="../../public/js/sessions/index.js"></script>
 </body>
 
 </html>

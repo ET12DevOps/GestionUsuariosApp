@@ -5,7 +5,8 @@ const auth = require('../auth')
 router.get('/roles', auth.isLoggedIn, (req, res) => {
     res.render('./roles/index', { 
         title: "Roles",
-        user: req.user})
+        user: req.user
+    })
 })
 
 router.get('/roles/:id/edit', auth.isLoggedIn, (req, res) => {
