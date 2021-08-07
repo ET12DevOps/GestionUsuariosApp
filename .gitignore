@@ -3,9 +3,6 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=node
 
 ### Node ###
-# Package
-package-lock.json
-
 # Logs
 logs
 *.log
