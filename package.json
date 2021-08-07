@@ -36,5 +36,8 @@
   "devDependencies": {
     "node-sass": "^6.0.1",
     "nodemon": "^2.0.12"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
   }
 }
