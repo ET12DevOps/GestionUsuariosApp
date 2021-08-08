@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <input id="enabled" type="checkbox" name="enabled" class="switch is-outlined is-info is-rtl">
+                    <input id="enabled" type="checkbox" name="enabled" class="switch is-rtl">
                     <label for="enabled" class="label is-small">ESTADO</label>
                 </div>
                 <div class="field">
@@ -67,18 +67,16 @@
                         <input class="input" type="text" name="updatedAt" id="updatedAt" disabled>
                     </div>
                 </div>
-                <button id="save-user" type="submit" class="button is-outlined is-primary">Guardar</button>
-                <a class="button is-outlined" href="/users">Cancelar</a>
             </div>
 
             <h1 class="title is-2 mt-4">
                 Roles
             </h1>
 
-            <div class="box">
-                <button id="save-user-roles" type="submit" class="button is-outlined is-primary">Guardar</button>
-                <a class="button is-outlined" href="/users">Cancelar</a>
-            </div>
+            <div id="roles" class="box"></div>
+
+            <button id="save-user" type="submit" class="button is-outlined is-primary">Guardar</button>
+            <a class="button is-outlined" href="/users">Cancelar</a>
         </div>
     </section>
     <script src="../../public/js/users/edit.js"></script>

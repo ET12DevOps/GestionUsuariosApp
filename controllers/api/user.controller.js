@@ -2,13 +2,17 @@ const express = require('express')
 const router = express.Router()
 const db = require('../../models')
 const User = db.User
+const Role = db.Role
 const { v4: uuidv4 } = require('uuid')
 const bcrypt = require('bcrypt');
 const auth = require('../../auth')
+const { Op } = require("sequelize");
 
 router.get('/users', auth.isLoggedIn, async (req, res) => {
-    
-    await User.findAll()
+
+    await User.findAll({
+        attributes: ['id', 'username', 'email', 'firstName', 'lastName', 'enabled', 'createdAt', 'createdBy', 'updatedAt', 'updatedBy']
+    })
         .then(data => {
             res.send(data);
         })
@@ -23,7 +27,10 @@ router.get('/users', auth.isLoggedIn, async (req, res) => {
 router.get('/users/:id', auth.isLoggedIn, async (req, res) => {
     const id = req.params.id;
 
-    await User.findByPk(id)
+    await User.findByPk(id, {
+        attributes: ['id', 'username', 'email', 'firstName', 'lastName', 'enabled', 'createdAt', 'createdBy', 'updatedAt', 'updatedBy'],
+        include: "roles"
+    })
         .then(data => {
             res.send(data);
         })
@@ -44,8 +51,16 @@ router.post('/users', auth.isLoggedIn, async (req, res) => {
         return;
     }
 
+    const roles = await Role.findAll({
+        where: {
+            id: {
+                [Op.or]: req.body.roles
+            }
+        }
+    })
+
     // Crear un usuario
-    const user = {
+    const newUser = {
         id: uuidv4(),
         username: req.body.username,
         password: await bcrypt.hash(req.body.password, 10),
@@ -60,41 +75,92 @@ router.post('/users', auth.isLoggedIn, async (req, res) => {
     };
 
     // Guardo el usuario en la base de datos
-    User.create(user)
-        .then(data => {
-            res.send(data);
+    const user = await User.create(newUser)
+
+    if (user != null) {
+        roles.forEach(role => {
+            user.addRole(role)
         })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while creating the User."
-            });
+
+        const userWithRoles = await User.findByPk(user.id, {
+            include: "roles"
+        })
+
+        console.log(userWithRoles)
+
+        res.send(userWithRoles);
+    } else {
+        res.status(500).send({
+            message:
+                err.message || "Some error occurred while creating the User."
         });
+    }
 })
 
 router.put('/users/:id', auth.isLoggedIn, async (req, res) => {
     const id = req.params.id;
 
+    const roles = await Role.findAll({
+        where: {
+            id: {
+                [Op.or]: req.body.roles
+            }
+        }
+    })
+    console.log(req.body)
+    //console.log(roles)
     //actualizo la informacion del objeto user
-    User.update(req.body, {
+    // User.update(req.body, {
+    //     where: { id: id }
+    // })
+    //     .then(num => {
+    //         if (num == 1) {
+
+    //             res.send({
+    //                 message: "User was updated successfully."
+    //             });
+    //         } else {
+    //             res.send({
+    //                 message: `Cannot update User with id=${id}. Maybe User was not found or req.body is empty!`
+    //             });
+    //         }
+    //     })
+    //     .catch(err => {
+    //         res.status(500).send({
+    //             message: "Error updating User with id=" + id
+    //         });
+    //     });
+
+    // Guardo el usuario en la base de datos
+    const num = await User.update(req.body, {
         where: { id: id }
     })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "User was updated successfully."
-                });
-            } else {
-                res.send({
-                    message: `Cannot update User with id=${id}. Maybe User was not found or req.body is empty!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error updating User with id=" + id
-            });
+
+    if (num != 1) {
+        res.send({
+            message: `Cannot update User with id=${id}. Maybe User was not found or req.body is empty!`
         });
+    }
+
+    const user = User.findByPk(id)
+
+    if (user != null) {
+        // roles.forEach(role => {
+        //     user.addRole(role)
+        // })
+
+        const userWithRoles = await User.findByPk(user.id, {
+            include: "roles"
+        })
+
+        console.log(userWithRoles)
+
+        res.send(userWithRoles);
+    } else {
+        res.status(500).send({
+            message: "Error updating User with id=" + id
+        });
+    }
 })
 
 router.delete('/users/:id', auth.isLoggedIn, async (req, res) => {
@@ -111,7 +177,7 @@ router.delete('/users/:id', auth.isLoggedIn, async (req, res) => {
                 });
             } else {
                 res.send({
-                    message: `Cannot delete User with id=${id}. Maybe User was not found!`
+                    message: `Cannot delete User with id = ${id}.Maybe User was not found!`
                 });
             }
         })
