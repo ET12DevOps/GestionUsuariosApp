@@ -53,9 +53,9 @@ const getUsers = async () => {
                 { select: 8, hidden: true },
                 {
                     select: 9, sortable: false, render: function (data, cell, row) {
-                        var editButton = `<a href="/users/${userData[row.dataIndex].id}/edit" id="edit-${userData[row.dataIndex].id}" class="mr-2 button is-small is-rounded is-primary is-light""><i class="las la-pen la-2x"></i></a>`
+                        var editButton = `<a href="/users/${userData[row.dataIndex].id}/edit" id="edit-${userData[row.dataIndex].id}" class="mr-4 has-text-info"><i class="fad fa-pencil"></i></a>`
 
-                        var deleteButton = `<a href="/users/${userData[row.dataIndex].id}/delete" id="delete-${userData[row.dataIndex].id}" class="button is-small is-rounded is-danger is-light"><i class="las la-trash-alt la-2x"></i></a>`
+                        var deleteButton = `<a href="/users/${userData[row.dataIndex].id}/delete" id="delete-${userData[row.dataIndex].id}" class="has-text-danger"><i class="fad fa-trash-alt"></i></a>`
 
                         return '<div class="has-text-centered"> ' + editButton + deleteButton + '</div>';
                     }
@@ -87,7 +87,7 @@ const getUser = async () => {
 
     const res = await fetch(url + 'api/users/' + id.value)
     const data = await res.json()
-    console.log(data)
+
     document.getElementById('id_edit').value = data.id
     document.getElementById('user_edit').value = data.username
     document.getElementById('email_edit').value = data.email

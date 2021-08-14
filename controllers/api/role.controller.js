@@ -7,7 +7,9 @@ const auth = require('../../auth')
 
 router.get('/roles', auth.isLoggedIn, async (req, res) => {
 
-    await Role.findAll()
+    await Role.findAll({
+        attributes: ['id', 'name', 'enabled', 'createdAt', 'updatedAt']
+    })
         .then(data => {
             res.send(data);
         })
@@ -70,9 +72,9 @@ router.post('/roles', auth.isLoggedIn, async (req, res) => {
 
 router.put('/roles/:id', auth.isLoggedIn, async (req, res) => {
     const id = req.params.id;
-    console.log(req.body)
+
     req.body.updatedAt = Date.now()
-    
+
     //actualizo la informacion del objeto role
     Role.update(req.body, {
         where: { id: id }

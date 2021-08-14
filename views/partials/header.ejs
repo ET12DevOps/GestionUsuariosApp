@@ -14,7 +14,7 @@
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
       <a class="navbar-item" href="/">
-        <i class="las la-home la-lg"></i>
+        <i class="fad fa-home"></i>
       </a>
 
       <div class="navbar-item has-dropdown is-hoverable">
@@ -36,8 +36,8 @@
               </div>
               <div class="level-right">
                 <div class="level-item">
-                  <span class="icon has-text-info">
-                    <i class="las la-tachometer-alt la-lg"></i>
+                  <span class="icon">
+                    <i class="fad fa-tachometer-alt-fast"></i>
                   </span>
                 </div>
               </div>
@@ -56,8 +56,8 @@
               </div>
               <div class="level-right">
                 <div class="level-item">
-                  <span class="icon has-text-info">
-                    <i class="las la-users la-lg"></i>
+                  <span class="icon">
+                    <i class="fad fa-users"></i>
                   </span>
                 </div>
               </div>
@@ -76,8 +76,8 @@
               </div>
               <div class="level-right">
                 <div class="level-item">
-                  <span class="icon has-text-info">
-                    <i class="las la-user-tag la-lg"></i>
+                  <span class="icon">
+                    <i class="fad fa-tags"></i>
                   </span>
                 </div>
               </div>
@@ -96,42 +96,36 @@
               </div>
               <div class="level-right">
                 <div class="level-item">
-                  <span class="icon has-text-info">
-                    <i class="las la-user-check la-lg"></i>
+                  <span class="icon">
+                    <i class="fad fa-user-check"></i>
                   </span>
                 </div>
               </div>
             </div>
           </a>
-          <!-- <a class="navbar-item" href="/dashboard">
-            <i class="las la-tachometer-alt la-lg"></i>
-            Panel
-          </a>
-          <a class="navbar-item" href="/users">
-            <i class="las la-users la-lg"></i>
-            Usuarios
-          </a>
-          <a class="navbar-item" href="/roles">
-            <i class="las la-user-tag la-lg"></i>
-            Roles
-          </a>
-          <a class="navbar-item" href="/sessions">
-            <i class="las la-user-check la-lg"></i>
-            Sesiones
-          </a> -->
         </div>
       </div>
     </div>
 
     <div class="navbar-end">
       <a class="navbar-item" href="#">
-        <i class="las la-user la-lg"></i>
-        <%= user.firstName %>
-          <%= user.lastName %>
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fad fa-user"></i>
+          </span>
+          <span>
+            <%= user.firstName %>
+              <%= user.lastName %>
+          </span>
+        </span>
       </a>
       <a class="navbar-item" href="/logout">
-        <i class="las la-sign-out-alt la-lg"></i>
-        Salir
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fad fa-sign-out-alt"></i>
+          </span>
+          <span>Salir</span>
+        </span>
       </a>
     </div>
   </div>

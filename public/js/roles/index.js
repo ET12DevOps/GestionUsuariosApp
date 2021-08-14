@@ -13,42 +13,48 @@ const getData = async () => {
         let progresBar = document.getElementById("bar")
 
         progresBar.style.display = "none"
-        
+
         const datatable = new simpleDatatables.DataTable("#roles_datatable", {
             searchable: true,
             paging: true,
             data: {
-                headings: ['IDENTIFICADOR', 'NOMBRE', 'ESTADO', 'CREACION', 'createdBy', 'ACTUALIZACION', 'updatedBy', 'ACCIONES'],
+                headings: ['NOMBRE', 'ESTADO', 'CREACION', 'ACTUALIZACION', 'ACCIONES'],
                 data: userData.map((x) => {
                     var res = Object.values(x)
+                    res.shift()
                     res.push('')
                     return res
                 })
             },
             columns: [
-                { select: 0, sortable: false },
-                { select: 1 },
-                { select: 2, render: function(data, cell, row) {
-                    if (data === 'true')
-                        return `<span class="tag is-success is-light">Activo</span>`
-                    else 
-                        return `<span class="tag is-danger is-light">Inactivo</span>`
-                }},
-                { select: 3, type: "date", render: function(data, cell, row){
-                    return new Date(data).toLocaleString('es-AR')
-                }},
-                { select: 4, hidden: true },
-                { select: 5, render: function(data, cell, row){
-                    return new Date(data).toLocaleString('es-AR')
-                } },
-                { select: 6, hidden: true },
-                { select: 7, sortable: false, render: function(data, cell, row){ 
-                    var editButton = `<a href="/roles/${userData[row.dataIndex].id}/edit" id="edit-${userData[row.dataIndex].id}" class="mr-2 button is-small is-rounded is-primary is-light"><i class="las la-pen la-2x"></i></a>`
-                    
-                    var deleteButton = `<a href="/roles/${userData[row.dataIndex].id}/delete" id="delete-${userData[row.dataIndex].id}" class="button is-small is-rounded is-danger is-light"><i class="las la-trash-alt la-2x"></a>`
+                { select: 0 },
+                {
+                    select: 1, render: function (data, cell, row) {
+                        if (data === 'true')
+                            return `<span class="tag is-success is-light">Activo</span>`
+                        else
+                            return `<span class="tag is-danger is-light">Inactivo</span>`
+                    }
+                },
+                {
+                    select: 2, type: "date", render: function (data, cell, row) {
+                        return new Date(data).toLocaleString('es-AR')
+                    }
+                },
+                {
+                    select: 3, render: function (data, cell, row) {
+                        return new Date(data).toLocaleString('es-AR')
+                    }
+                },
+                {
+                    select: 4, sortable: false, render: function (data, cell, row) {
+                        var editButton = `<a href="/roles/${userData[row.dataIndex].id}/edit" id="edit-${userData[row.dataIndex].id}" class="mr-2 has-text-info"><i class="fad fa-pencil"></i></a>`
 
-                    return '<div class="has-text-centered"> ' + editButton + deleteButton + '</div>';
-                }}
+                        var deleteButton = `<a href="/roles/${userData[row.dataIndex].id}/delete" id="delete-${userData[row.dataIndex].id}" class="has-text-danger"><i class="fad fa-trash-alt"></i></a>`
+
+                        return '<div class="has-text-centered"> ' + editButton + deleteButton + '</div>';
+                    }
+                }
             ],
             labels: {
                 placeholder: "Buscar..",
@@ -57,8 +63,8 @@ const getData = async () => {
                 info: "Mostrando {start} a {end} de {rows} resultados (Página {page} de {pages})"
             }
         });
-        
-        const buscar = document.getElementsByClassName('dataTable-input')        
+
+        const buscar = document.getElementsByClassName('dataTable-input')
         buscar[0].classList.add('input')
         buscar[0].classList.add('is-primary')
 

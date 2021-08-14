@@ -33,7 +33,6 @@ router.get('/users/:id', auth.isLoggedIn, async (req, res) => {
         include: "roles"
     })
         .then(data => {
-            console.log(data.toJSON())
             res.send(data);
         })
         .catch(err => {
@@ -88,8 +87,6 @@ router.post('/users', auth.isLoggedIn, async (req, res) => {
             include: "roles"
         })
 
-        console.log(userWithRoles)
-
         res.send(userWithRoles);
     } else {
         res.status(500).send({
@@ -119,9 +116,6 @@ router.put('/users/:id', auth.isLoggedIn, async (req, res) => {
 
     if (user != null) {
 
-        console.log(user.roles.length)
-        console.log(req.body.roles)
-
         if (user.roles.length > 0) {
             await UserRole.destroy({
                 where: {
@@ -139,15 +133,7 @@ router.put('/users/:id', auth.isLoggedIn, async (req, res) => {
             })
         })
 
-        console.log(userRoles)
-
         await UserRole.bulkCreate(userRoles)
-
-        const user2 = await User.findByPk(id, {
-            include: "roles"
-        })
-
-        console.log(user2.toJSON())
 
         res.send(user);
     } else {
