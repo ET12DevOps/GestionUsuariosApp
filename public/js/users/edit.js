@@ -1,44 +1,46 @@
 var url = window.location.protocol + "//" + window.location.host + "/";
 
 document.addEventListener('DOMContentLoaded', () => {
-    getRoles()
     getUser()
 })
 
 const getUser = async () => {
-    const id = document.getElementById('userId')
-    const res = await fetch(url + 'api/users/' + id.value)
-    const user = await res.json()
-    console.log(user)
-    document.getElementById('userId').value = user.id
-    document.getElementById('username').value = user.username
-    document.getElementById('email').value = user.email
-    document.getElementById('firstName').value = user.firstName
-    document.getElementById('lastName').value = user.lastName
-    document.getElementById('enabled').checked = user.enabled
-    document.getElementById('createdAt').value = new Date(user.createdAt).toLocaleString('es-AR')
-    document.getElementById('updatedAt').value = new Date(user.updatedAt).toLocaleString('es-AR')
-
-    let rolesDiv = document.querySelectorAll('input[name^=role]')
-    for (var i = 0; i < rolesDiv.length; i++) {
-        if (user.roles.map(x => 'role_' + x.id).includes(rolesDiv[i].id))
-            rolesDiv[i].checked = true;
-    }
-}
-
-const getRoles = async () => {
     try {
+        const id = document.getElementById('userId')
+        const res = await fetch(url + 'api/users/' + id.value)
+        const user = await res.json()
+
+        document.getElementById('userId').value = user.id
+        document.getElementById('username').value = user.username
+        document.getElementById('email').value = user.email
+        document.getElementById('firstName').value = user.firstName
+        document.getElementById('lastName').value = user.lastName
+        document.getElementById('enabled').checked = user.enabled
+        document.getElementById('createdAt').value = new Date(user.createdAt).toLocaleString('es-AR')
+        document.getElementById('updatedAt').value = new Date(user.updatedAt).toLocaleString('es-AR')
+
         const response = await fetch(url + 'api/roles')
         const roles = await response.json()
+
         let rolesDiv = document.getElementById('roles')
+
         let htmlRoles = '';
         roles.forEach(role => {
-            htmlRoles += `
-            <div class="field">
-                <input id="role_${role.id}" type="checkbox" name="role_${role.id}" class="switch">
-                <label for="role_${role.id}">${role.name}</label>
-            </div>
-            `
+            if (user.roles.map(x => x.id).includes(role.id)) {
+                htmlRoles += `
+                    <div class="field">
+                        <input id="role_${role.id}" type="checkbox" name="role_${role.id}" class="switch" checked>
+                        <label for="role_${role.id}">${role.name}</label>
+                    </div>
+                    `
+            } else {
+                htmlRoles += `
+                    <div class="field">
+                        <input id="role_${role.id}" type="checkbox" name="role_${role.id}" class="switch">
+                        <label for="role_${role.id}">${role.name}</label>
+                    </div>
+                    `
+            }
         });
         rolesDiv.innerHTML = htmlRoles
     } catch (error) {
