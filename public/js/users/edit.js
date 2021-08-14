@@ -29,10 +29,10 @@ const getUser = async () => {
 const getRoles = async () => {
     try {
         const response = await fetch(url + 'api/roles')
-        const data = await response.json()
+        const roles = await response.json()
         let rolesDiv = document.getElementById('roles')
         let htmlRoles = '';
-        data.forEach(role => {
+        roles.forEach(role => {
             htmlRoles += `
             <div class="field">
                 <input id="role_${role.id}" type="checkbox" name="role_${role.id}" class="switch">
@@ -59,7 +59,6 @@ function putData() {
         if (rolesDiv[i].checked)
             rolesSelected.push(rolesDiv[i].name.substring(5, rolesDiv[i].name.length))
     }
-
     var data = {
         id: document.getElementById('userId').value,
         username: document.getElementById('username').value,

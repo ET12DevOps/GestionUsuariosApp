@@ -36,6 +36,7 @@ db.sequelize = sequelize;
 db.User = require("./user.model.js")(sequelize, Sequelize);
 db.Role = require("./role.model.js")(sequelize, Sequelize);
 db.Login = require("./login.model.js")(sequelize, Sequelize);
+db.UserRole = require("./userRole.model.js")(sequelize, Sequelize);
 
 db.Login.belongsTo(db.User, {
   foreignKey: "userId"

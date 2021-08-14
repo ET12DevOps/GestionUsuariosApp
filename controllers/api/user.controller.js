@@ -3,6 +3,7 @@ const router = express.Router()
 const db = require('../../models')
 const User = db.User
 const Role = db.Role
+const UserRole = db.UserRole
 const { v4: uuidv4 } = require('uuid')
 const bcrypt = require('bcrypt');
 const auth = require('../../auth')
@@ -32,6 +33,7 @@ router.get('/users/:id', auth.isLoggedIn, async (req, res) => {
         include: "roles"
     })
         .then(data => {
+            console.log(data.toJSON())
             res.send(data);
         })
         .catch(err => {
@@ -100,37 +102,6 @@ router.post('/users', auth.isLoggedIn, async (req, res) => {
 router.put('/users/:id', auth.isLoggedIn, async (req, res) => {
     const id = req.params.id;
 
-    const roles = await Role.findAll({
-        where: {
-            id: {
-                [Op.or]: req.body.roles
-            }
-        }
-    })
-    console.log(req.body)
-    //console.log(roles)
-    //actualizo la informacion del objeto user
-    // User.update(req.body, {
-    //     where: { id: id }
-    // })
-    //     .then(num => {
-    //         if (num == 1) {
-
-    //             res.send({
-    //                 message: "User was updated successfully."
-    //             });
-    //         } else {
-    //             res.send({
-    //                 message: `Cannot update User with id=${id}. Maybe User was not found or req.body is empty!`
-    //             });
-    //         }
-    //     })
-    //     .catch(err => {
-    //         res.status(500).send({
-    //             message: "Error updating User with id=" + id
-    //         });
-    //     });
-
     // Guardo el usuario en la base de datos
     const num = await User.update(req.body, {
         where: { id: id }
@@ -142,20 +113,43 @@ router.put('/users/:id', auth.isLoggedIn, async (req, res) => {
         });
     }
 
-    const user = User.findByPk(id)
+    const user = await User.findByPk(id, {
+        include: "roles"
+    })
 
     if (user != null) {
-        // roles.forEach(role => {
-        //     user.addRole(role)
-        // })
 
-        const userWithRoles = await User.findByPk(user.id, {
+        console.log(user.roles.length)
+        console.log(req.body.roles)
+
+        if (user.roles.length > 0) {
+            await UserRole.destroy({
+                where: {
+                    userId: user.id
+                }
+            })
+        }
+
+        let userRoles = []
+
+        req.body.roles.forEach(role => {
+            userRoles.push({
+                userId: user.id,
+                roleId: role
+            })
+        })
+
+        console.log(userRoles)
+
+        await UserRole.bulkCreate(userRoles)
+
+        const user2 = await User.findByPk(id, {
             include: "roles"
         })
 
-        console.log(userWithRoles)
+        console.log(user2.toJSON())
 
-        res.send(userWithRoles);
+        res.send(user);
     } else {
         res.status(500).send({
             message: "Error updating User with id=" + id
